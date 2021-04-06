@@ -1,0 +1,69 @@
+﻿@model IEnumerable<PetShop.Models.Animal>;
+
+@{
+    ViewBag.Title = "Catalog";
+    <link href="~/styles/DropDownCategories.css" rel="stylesheet" />
+}
+
+<div id="Catalog">
+    <div class="navbar">
+        <div class="dropdown">
+            <button class="dropbtn">
+                Choose a Category
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                @foreach (var item in ViewBag.Categories)
+                {
+                    <div>
+                        <a asp-action="Catalog" asp-route-id="@item.Id">@item.Name</a>
+                    </div>
+                }
+            </div>
+            <span>@Html.DisplayNameFor(model => model.Category.Name)</span>
+            <span id="ChoosenCategory">@ViewBag.ChoosenCategory</span>
+        </div>
+    </div>
+
+    <table>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PictureName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                <p>find out more and comment  </p>
+            </th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="width:50%">
+                    <img src="@item.PictureName" />
+                </td>
+                <td>
+                    @Html.DisplayFor(Model => item.Name)
+                </td>
+                <td>
+                    <form>
+                        <button value="details" asp-action="AnimalDetails" asp-route-id="@item.Id">
+                            details
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+
+
+

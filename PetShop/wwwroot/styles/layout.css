@@ -1,0 +1,107 @@
+﻿.moveRight {
+    margin-left: 10%; 
+}
+
+
+#color {
+    background-color: #a3783dc9;
+}
+
+.mostRight {
+    margin-left: 15%;
+}
+
+.header {
+    text-align: center;
+    font-family:Aharoni;
+   
+}
+
+
+ 
+
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 10%;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+
+li a {
+    position:relative;
+    color: white;
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+ul li.active a {
+    background-color: #079828;
+    color: white;
+}
+
+
+
+    li a:hover:not(.active) {
+        background-color: #555;
+        color: white;
+    }
+table{
+    width:90%;
+}
+tr {
+    width: 90%;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+ tr:nth-child(even) {
+    background-color: #eee;
+}
+
+ tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+ th {
+    background-color: black;
+    color: white;
+}
+tr:hover {
+    background-color: #fbe6c8;
+}
+
+input:invalid {
+    box-shadow: 0 0 5px 1px red;
+}
+input:valid {
+    box-shadow: 0 0 5px 1px green;
+}
+
+input:focus:invalid {
+    box-shadow: none;
+}
+
+img{
+  display:block;
+ width:550px;
+ height:430px;
+}
+
+#commentSection {
+    background-color: #eee;
+    display: inline-block;
+    border: solid;
+}
+
+
+
+

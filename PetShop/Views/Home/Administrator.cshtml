@@ -1,0 +1,83 @@
+﻿@model IEnumerable<PetShop.Models.Animal>;
+@{
+    ViewData["Title"] = "Administrator";
+    <link href="~/styles/DropDownCategories.css" rel="stylesheet" />
+}
+
+<div id="Administrator">
+    <div class="navbar">
+        <form method="get">
+            <a asp-action="AddAnimal"> Add An Animal</a>
+        </form>
+        <div class="dropdown">
+            <button class="dropbtn">
+                Choose a Category
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                @foreach (var item in ViewBag.Categories)
+                {
+                    <div>
+                        <a asp-action="Administrator" asp-route-id="@item.Id">@item.Name</a>
+                    </div>
+
+                }
+            </div>
+            <span>@Html.DisplayNameFor(model => model.Category.Name)</span>
+            <span id="ChoosenCategory">@ViewBag.ChoosenCategory</span>
+
+        </div>
+    </div>
+
+    <table>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PictureName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+
+            <th></th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@item.PictureName" />
+                </td>
+                <td>
+                    @Html.DisplayFor(Model => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Description)
+                </td>
+                <td>
+                    <form>
+                        <button formmethod="get" value="Edit" asp-action="UpdateAnimal" asp-route-id="@item.Id"> Edit </button>
+                        <button value="Delete" asp-action="DeleteAnimal" asp-route-id="@item.Id"> Delete </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+
+

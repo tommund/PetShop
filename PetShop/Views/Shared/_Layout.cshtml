@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    
+    <script src="~/Scripts/jquery.js"></script>
+    <link href="~/styles/layout.css" rel="stylesheet" />
+
+</head>
+
+<body >
+    <section class="menu">
+        <h1 class="header">Menu</h1>
+        <ul  class="myMenu" >
+            <li class="Index"><a href="/Home/Index">Home</a></li>
+            <li class="Catalog"><a href="/Home/Catalog/1">Catalog</a></li>
+            <li class="Administrator"><a href="/Home/Administrator/1">Administrator</a></li>
+        </ul>
+    </section>
+
+
+    <div class="moveRight">
+        <div class="mostRight" >
+            <img src="~/Images/logo Pets (2).png"
+                 style="width:900px;height:350px;">
+        </div>
+        <!--
+    -->
+        <div  id="color">
+            <div class="moveRight">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        $(function () {
+            setNavigation();
+        });
+        function setNavigation() {
+            var path = window.location.pathname;
+            path = path.replace(/\/$/, "");
+            path = decodeURIComponent(path);
+
+            $(".myMenu a").each(function () {
+                var href = $(this).attr('href');
+                if (path.substring(0, href.length) === href) {
+                    $(this).closest('li').addClass('active');
+                }
+            });
+        };
+
+       
+
+
+       
+
+       
+    </script>
+</body>
+</html>

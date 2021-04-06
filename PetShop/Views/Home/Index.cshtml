@@ -1,0 +1,47 @@
+﻿@model IEnumerable<PetShop.ViewModels.PresentHomeData>;
+@{
+    ViewBag.Title = "HomePage";
+}
+<h1 class="header"> most commented animals:</h1>
+<div id="Index">
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.AnimalName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.AnimalDescription)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.CommentCount)
+            </th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@item.ImagePath" />
+                </td>
+                <td>
+                    @Html.DisplayFor(Model => item.AnimalName)
+                </td>
+                <td>
+                    <p> @Html.DisplayFor(Model => item.AnimalDescription)   </p>
+                </td>
+                <td>
+                    @Html.DisplayFor(Model => item.CommentCount)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+

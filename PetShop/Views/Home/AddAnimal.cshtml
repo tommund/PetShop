@@ -1,0 +1,31 @@
+﻿@model PetShop.Models.Animal
+@{
+    ViewData["Title"] = "Add Animal";
+}
+
+<form action="AddAnimal"  method="post" enctype="multipart/form-data">
+    <fieldset>
+        <legend>Add Animal To Database:</legend>
+        
+        <label asp-for="Name"></label><br>
+        <input asp-for="Name" type="text" name="animalName" required><br>
+        <label asp-for="Age" ></label><br>
+        <input asp-for="Age" type="number"  step="0.1" min="0.1" max="120"  name="animalAge" required><br><br>
+
+        <label asp-for="Description"></label><br>
+        <input asp-for="Description" type="text" name="animalDescription" required><br>
+
+        <label for="ChoosenCategoryId">Choose a Category:</label>
+        <select id="ChoosenCategoryId" name="ChoosenCategoryId" required>
+            @foreach (var item in ViewBag.Categories)
+            {
+                <option value=@item.Id >@item.Name</option>
+            }
+        </select>
+        <label for="myfile">Select an Image:</label>
+        <input type="file" id="myfile" name="file" required><br><br>
+        <input type="reset" value="Reset All Feilds">
+        <input type="submit" value="Submit">
+    </fieldset>
+</form>
+

@@ -1,0 +1,93 @@
+﻿@model PetShop.ViewModels.AnimalDetail;
+@{
+    ViewData["Title"] = "Animal Details";
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/jquery.min.js"></script>
+
+}
+
+
+
+
+
+<table>
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </th>
+    </tr>
+
+
+
+
+    <tr>
+        <td>
+            @Html.DisplayFor(Model => Model.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(Model => Model.Age)
+        </td>
+        <td>
+            <p> @Html.DisplayFor(Model => Model.Description)   </p>
+        </td>
+        <td>
+            @Html.DisplayFor(Model => Model.CategoryName)
+        </td>
+    </tr>
+
+</table>
+
+<div>
+    <form id="addComment" asp-controller="Home" asp-action="AddComment" asp-route-id="@Model.AnimalId">
+        <label asp-for="@Model.CommentToAdd" placeholder="add comment here and press submit.."></label><br>
+        <input asp-for="@Model.CommentToAdd" type="text" id="comment" name="comment" minlength="1" maxlength="250"><br>
+        <span asp-validation-for="@Model.CommentToAdd" id="span"></span>
+        <input type="submit" name="submit" id="submit" value="submit">
+    </form>
+
+
+
+
+    <section id="commentSection">
+        <h1>  @Html.DisplayNameFor(Model => Model.CommentsText) </h1>
+        <ol type="1">
+            @foreach (var item in Model.CommentsText)
+            {
+
+                <li> <p>@item</p> </li>
+            }
+
+        </ol>
+    </section>
+</div>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('#submit').click(function () {
+                var value = $('#comment').val();
+                if (value.length < 1) {
+                    event.preventDefault();
+                    alert(" sorry,can not submit an empty comment...")
+                }
+            })
+        });
+    </script>
+
+
+
+
