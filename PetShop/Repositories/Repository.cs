@@ -22,7 +22,7 @@ namespace PetShop.Repositories
         public IEnumerable<PresentHomeData> GetTopCommentedAnimals(int amountOfAnimals)
         {
 
-            int countDataToPresent = 0; //Hello
+            int countDataToPresent = 0;
 
             var AnimalIdAndNumComments = _myPetsContext.Comments.GroupBy(c => c.AnimalId)
                                                .Select(c => new { animalId = c.Key, countedComment = c.Count() })
