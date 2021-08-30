@@ -23,16 +23,17 @@ namespace PetShop.Controllers
             _env = env;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            return View(_myRepository.GetTopCommentedAnimals(2));
+           
+            return View(await _myRepository.GetTopCommentedAnimals(2));
         }
 
-        public IActionResult Catalog(int id)
+        public async Task<IActionResult> Catalog(int id)
         {
             ViewBag.ChoosenCategory = _myRepository.GetCategoryNameById(id);
-            ViewBag.Categories = _myRepository.GetCategories();
-            return View(_myRepository.GetAnimalsByCategory(id));
+            ViewBag.Categories = await _myRepository.GetCategories();
+            return View( await _myRepository.GetAnimalsByCategory(id));
         }
 
         public IActionResult AnimalDetails(int id)
@@ -46,17 +47,17 @@ namespace PetShop.Controllers
             return RedirectToAction("AnimalDetails", new { id = id});
         }
 
-        public IActionResult Administrator(int id)
+        public async Task<IActionResult> Administrator(int id)
         {
             ViewBag.ChoosenCategory = _myRepository.GetCategoryNameById(id);
-            ViewBag.Categories = _myRepository.GetCategories();
-            return View(_myRepository.GetAnimalsByCategory(id));
+            ViewBag.Categories = await _myRepository.GetCategories();
+            return View(await _myRepository.GetAnimalsByCategory(id));
         }
 
         [HttpGet]
-        public IActionResult AddAnimal()
+        public async Task<IActionResult> AddAnimal()
         {
-            ViewBag.Categories = _myRepository.GetCategories();
+            ViewBag.Categories = await _myRepository.GetCategories();
             return View();
         }
 

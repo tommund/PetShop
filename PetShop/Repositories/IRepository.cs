@@ -9,13 +9,13 @@ namespace PetShop.Repositories
 {
     public interface IRepository
     {
-        IEnumerable<PresentHomeData> GetTopCommentedAnimals(int amountOfAnimals);
+        Task<IEnumerable<PresentHomeData>> GetTopCommentedAnimals(int amountOfAnimals);
         string GetCategoryNameById(int CategoryId);
         int GetCategoryIdByAnimalId(int animalId);
-        IEnumerable<Animal> GetAnimalsByCategory(int categoryId);
+        Task <IEnumerable<Animal>> GetAnimalsByCategory(int categoryId);
         Animal GetAnimalById(int animalId);
-        IEnumerable<Category> GetCategories();
-        IEnumerable<Comment> GetComments(int animalId);
+        Task<IEnumerable<Category>> GetCategories();
+        Task <IEnumerable<Comment>> GetComments(int animalId);
         AnimalDetail GetAnimalDetail(int animalId);
         void AddComment(int animalId, string commentText);
         void AddAnimal(string animalName, double animalAge, string animalDescription, int ChoosenCategoryId, string Url);

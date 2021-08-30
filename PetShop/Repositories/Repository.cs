@@ -11,7 +11,7 @@ namespace PetShop.Repositories
 {
     public class Repository : IRepository
     {
-        private PetsContext _myPetsContext;
+        private readonly PetsContext _myPetsContext;
 
 
         public Repository(PetsContext myPetsContext)
@@ -19,7 +19,7 @@ namespace PetShop.Repositories
             _myPetsContext = myPetsContext;
         }
 
-        public IEnumerable<PresentHomeData> GetTopCommentedAnimals(int amountOfAnimals)
+        public async Task<IEnumerable<PresentHomeData>> GetTopCommentedAnimals(int amountOfAnimals)
         {
 
             int countDataToPresent = 0;
@@ -44,29 +44,27 @@ namespace PetShop.Repositories
             foreach (var item in _myPetsContext.Animals)
             {
                 if (countDataToPresent >= amountOfAnimals) break;
-                
+
                 if (!AnimalIdAndNumComments.Exists(x => x.animalId.Equals(item.Id)))
                 {
                     countDataToPresent++;
                     dataForMainPage.Add(new PresentHomeData(item.PictureName, item.Name, 0, item.Description));
                 }
             }
-
-            return dataForMainPage.OrderByDescending(c => c.CommentCount)
-                   .Select(data => data).Take(amountOfAnimals);
+            return  await Task.Run( () => dataForMainPage.OrderByDescending(c => c.CommentCount)
+            .Select(data => data)
+            .Take(amountOfAnimals));
         }
-
-        public IEnumerable<Animal> GetAnimalsByCategory(int categoryId)
+        public async Task<IEnumerable<Animal>> GetAnimalsByCategory(int categoryId)
         {
-            return _myPetsContext.Animals.Where(a => a.CategoryId.Equals(categoryId))
-                                                       .Select(a => a).ToList();
+            return await Task.Run(() => _myPetsContext.Animals.Where(a => a.CategoryId.Equals(categoryId))
+                                                       .Select(a => a).ToList());
         }
+        public async Task <IEnumerable<Category>> GetCategories() => await Task.Run(() => _myPetsContext.Categories.Select(c => c).ToList());
 
-        public IEnumerable<Category> GetCategories() => _myPetsContext.Categories.Select(c => c).ToList();
+        public  Animal  GetAnimalById(int id) =>  _myPetsContext.Animals.Where(a => a.Id.Equals(id)).SingleOrDefault();
 
-        public Animal GetAnimalById(int id) => _myPetsContext.Animals.Where(a => a.Id.Equals(id)).SingleOrDefault();
-
-        public IEnumerable<Comment> GetComments(int animalId) => _myPetsContext.Comments.Where(a => a.Animal.Id.Equals(animalId)).ToList();
+        public async Task < IEnumerable<Comment>> GetComments(int animalId) => await Task.Run(() => _myPetsContext.Comments.Where(a => a.Animal.Id.Equals(animalId)).ToList());
 
         public void AddComment(int animalId, string commentText)
         {
