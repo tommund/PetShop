@@ -91,9 +91,9 @@ namespace PetShop.Controllers
         }
 
         [HttpGet]
-        public IActionResult UpdateAnimal(int id)
+        public async Task<IActionResult>             UpdateAnimal(int id)
         {
-            ViewBag.Categories = _myRepository.GetCategories();
+            ViewBag.Categories = await _myRepository.GetCategories();
             return View(_myRepository.GetAnimalById(id));
         }
 
